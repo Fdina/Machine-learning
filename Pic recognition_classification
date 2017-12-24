@@ -1,0 +1,25 @@
+# Pic recognition with classification.
+# Use data iris from tensorflow.
+# Use  2 libraries tensorflow and skitlearn
+# 3 steps: a- collect data, b- choose model, c-train model 
+# a- collect data
+
+import tensorflow as tf
+import tensorflow.contrib learn as skflow
+from sklearn import datasets, metrics
+
+#load data, iris data is already included in the tensorflow package
+iris = datasets.load_iris()
+
+#b- choose model: we need to classify a flower >> classifier. WE have few data so use linear classifier.    
+#first defining the feature columns is necessary, otherwise we will get the following error "__init__() missing 1 required positional argument: 'feature_columns'" 
+feature_columns = skflow.infer_real_valued_columns_from_input(iris.data)
+
+classifier = skflow.LinearClassifier(feature_columns= feature_columns, n_classes=3) 
+
+#old version was classifier = skflow.LinearClassifier(feature_columns= feature_columns, n_classes=3)
+
+#c- train model: the actual learning comes here. The model is working with the dataset to predict better (lower error rate)
+classifier.fit(iris.data, iris.target), classifier.predict(iris.data))
+print("Accuracy:%f" % score)
+
