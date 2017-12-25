@@ -1,0 +1,32 @@
+# Type of data: labelled
+# Type of learning: Supervised Learning
+# Libraries: pandas to read, scikit learn: machine learning library to use, and matplotlib to visualize model and data
+#type of machine learning task: Regression
+
+# Import libraries:
+    import pandas as pd
+    from sklearn import linear_model
+    import matplotlib.pyplot as plt
+
+#Locate your file if needed
+    import os
+    cwd = os.getcwd()
+    files = os.listdir(cwd)
+# to get the list of all the files in ur folder
+    print ("Files in '%s':%s" % (cwd, files))
+
+# read dataset (table with fixed formatted line: use read_fwf)
+    dataframe = pd.read_fwf('brain_body.txt')
+    x_values = dataframe[['Brain']]
+    y_values = dataframe[['Body']]
+
+# train the model
+    body_reg = linear_model.LinearRegression()
+
+# find the best fit line
+    body_reg.fit(x_values, y_values)
+    
+# Visualize the data 
+    plt.scatter(x_values, y_values)
+    plt.plot(x_values, body_reg.predict(x_values))
+    plt.show()
